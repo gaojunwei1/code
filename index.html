@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- <style>
+  .flow {
+    height: 120px;
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hue 3s linear infinite;
+    font-size: 50px;
+    font-weight: 700;
+    padding: 20px;
+  }
+
+  @keyframes hue {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+
+    100% {
+      filter: hue-rotate(360deg);
+    }
+  }
+</style> -->
+<script>
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('get', 'https://api.uomg.com/api/rand.qinghua');
+  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {//服务端返回了所有结果
+      //判断响应状态码 200 404 403 401 500 (2xx 2开头都表示成功)
+      if (xhr.status >= 200 && xhr.status < 300) {
+        //拿到响应结果,在这里可以对结果进行处理
+        var a = JSON.parse(xhr.response)
+        console.log(a.content);
+        document.getElementById('box').innerHTML = a.content
+      }
+    }
+  }
+</script>
+
+<body>
+  <div id="box" class="flow"></div>
+
+</body>
+
+</html>
